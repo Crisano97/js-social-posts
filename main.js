@@ -127,7 +127,7 @@ posts.forEach((element) => {
     const postLikes = createNewElementWithTwoClass('div', 'likes', 'js-likes');
 
     const buttonContainer = createNewElement('div', 'likes__cta');
-    const button = createNewElementWithTwoClass('a', 'like-button', 'js-like-button');
+    const button = createNewElementWithTwoClass('button', 'like-button', 'js-like-button');
     button.setAttribute('href', '#');
     button.setAttribute('data-postid', element.id);
 
