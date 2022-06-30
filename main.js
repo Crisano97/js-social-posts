@@ -100,31 +100,72 @@ const posts = [
 posts.forEach((element) =>{
 
 const postListContainer = document.getElementById('container');
+
 const newPostFullContainer = createNewElement('div', 'post');
+
 const postHeader = createNewElement('div', 'post__header');
+
 const postMeta = createNewElement('div', 'post-meta');
+
 const postMetaIcon = createNewElement('div', 'post-meta__icon');
 const profilePic = createNewImg(element.author.image, element.author.name, 'profile-pic')
+
 const postMetaData = createNewElement('div', 'post-meta__data');
 const postMetaAuthor =createNewElement('div', 'post-meta__author');
 postMetaAuthor.innerHTML = element.author.name;
 const postMetaTime = createNewElement('div', 'post-meta__time');
 postMetaTime.innerHTML = element.created;
 
+const postText = createNewElement('div', 'post__text');
+postText.innerHTML = element.content;
+
+const postImageContainer = createNewElement('div', 'post__image');
+const postImage = createNewImg(element.media);
+
+const postFooter = createNewElement('div', 'post__footer');
+
+const postLikes = createNewElementWithTwoClass('div', 'likes', 'js-likes');
+
+const buttonContainer = createNewElement('div', 'likes__cta');
+const button = createNewElementWithTwoClass('a', 'like-button', 'js-like-button');
+button.setAttribute('href', '#');
+button.setAttribute('data-postid', element.id);
+
+const iconLike = createNewElementWithTwoClass('like-button__icon', 'fas');
+iconLike.classList.add('fa-thumbs-up')
+const likeText = createNewElement('span', 'like-button__label');
+likeText.innerHTML = "Mi Piace";
+
+const likesCounter = createNewElement('div', 'likes__counter');
+likesCounter.innerHTML = `piace a <b>${element.likes}</b> persone  `;
+console.log(likesCounter.innerHTML)
+
+
+
+
+
 postListContainer.append(newPostFullContainer);
-newPostFullContainer.append(postHeader);
+newPostFullContainer.append(postHeader, postText, postImageContainer, postFooter);
 postHeader.append(postMeta);
 postMeta.append(postMetaIcon, postMetaData);
 postMetaIcon.append(profilePic);
 postMetaData.append(postMetaAuthor, postMetaTime);
+postImageContainer.append(postImage);
+postFooter.append(postLikes);
+postLikes.append(buttonContainer, likesCounter);
+buttonContainer.append(button);
+button.append(iconLike, likeText);
 });
-
-
-
 
 function createNewElement (element, elementClass) {
     const newElement = document.createElement(element);
     newElement.classList.add(elementClass);
+    return newElement;
+}
+
+function createNewElementWithTwoClass (element, elementClass1, elementClass2) {
+    const newElement = document.createElement(element);
+    newElement.classList.add(elementClass1, elementClass2);
     return newElement;
 }
 
