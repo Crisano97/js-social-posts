@@ -97,6 +97,9 @@ const posts = [
     }
 ];
 
+let isLiked = false;
+
+
 posts.forEach((element) => {
 
     const postListContainer = document.getElementById('container');
@@ -139,8 +142,19 @@ posts.forEach((element) => {
     const likesCounter = createNewElement('div', 'likes__counter');
     likesCounter.innerHTML = `piace a <b>${element.likes}</b> persone  `;
 
+
     button.addEventListener('click', function () {
-        button.classList.add('like-button--liked');
+
+        if (isLiked ===false) {
+            button.classList.add('like-button--liked');
+            likesCounter.innerHTML = `piace a <b>${element.likes + 1}</b> persone  `;
+            isLiked = true;
+        }  else if (isLiked === true) {
+            button.classList.remove('like-button--liked');
+            likesCounter.innerHTML = `piace a <b>${element.likes}</b> persone  `;
+            isLiked = false;
+        }
+       
     })
 
     postListContainer.append(newPostFullContainer);
